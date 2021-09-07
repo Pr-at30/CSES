@@ -12,7 +12,7 @@ int main()
     {
         int a,b;
         cin>>a>>b;
-        if((a-b)&1)
+        if((a-b)&(1))
         {
             cout<<"YES\n";
         }       

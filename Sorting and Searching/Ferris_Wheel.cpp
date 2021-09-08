@@ -2,6 +2,43 @@
 using namespace std;
 #define ll long long int
 
+void solve()
+{
+    int n,x;
+    cin>>n>>x;
+    vector<int> a;  vector<bool> ass;
+    for(int i=0;i<n;i++)
+    {
+        int x;
+        cin>>x;
+        a.emplace_back(x);
+        ass.push_back(false);
+    }
+    sort(a.begin(),a.end());
+
+    int ans=0;
+    for(int i=0,j=n-1;i<j;  )
+    {
+        if((a[i]+a[j])<=x)
+        {
+            ass[i]=true;  ass[j]=true;
+            i++;    j--;    ans++;  
+        }
+        else
+        {
+            j--;
+        }
+    }
+    for(auto x:ass)
+    {
+        if(!x)
+        {
+            ans++;  x=true;
+        }
+    }
+    cout<<ans<<"\n";
+}
+
 int main()
 {
     ios_base::sync_with_stdio(0);
@@ -9,35 +46,7 @@ int main()
     int t=1;
     while(t--)
     {
-        int n,x;
-        cin>>n>>x;
-        vector<int> a;
-        for(int i=0;i<n;i++)
-        {
-            int x;
-            cin>>x;
-            a.emplace_back(x);
-        }
-        sort(a.begin(),a.end());
-        int ans=0;
-        int sum=0;
-        for(int i=0;i<n;)
-        {   
-            int c=0;
-            while(sum+a[i]<=x)
-            {
-                c++;
-                sum+=a[i];
-                i++;
-            }
-            sum=0;
-            ans++;
-        }
-        cout<<ans<<"\n";
+        solve();
     }
     return 0;
 }
-
-// 5 7 8 8 8 8 9 9 10 10
-
-//Not a correct solution

@@ -1,3 +1,0 @@
-# CSES
-
-CSES Solutions

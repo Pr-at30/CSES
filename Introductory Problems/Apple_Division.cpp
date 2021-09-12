@@ -9,7 +9,7 @@ int main()
     ll t=1;
     while(t--)
     {
-        ll n;
+        ll n,sum=0;
         cin>>n;
         vector<ll> a;
         for(ll i=0;i<n;i++)
@@ -17,16 +17,24 @@ int main()
             ll x;
             cin>>x;
             a.emplace_back(x);
+            sum+=x;
         }
-        sort(a.begin(),a.end());
-        for(ll i=1;i<n;i++)
-        {
-            a[i]=a[i-1]+a[i];
-        }
-        int ans=INT16_MAX;
-        for(int i=0;i<n;i++)
+        ll size = pow(2,n);
+        ll ans=INT32_MAX;
+        for(int i=0;i<size;i++)
         {   
-            ans=min(ans,(a[n-1]-2*a[i]));
+            ll ssum=0;
+            for(int j=0;j<n;j++)
+            {
+                if(i&(1<<j))
+                {
+                    ssum+=a[j];
+                }       
+            }
+            if(ssum!=sum)
+            {
+                ans=min(abs(sum-2*ssum),ans);
+            }
         }
         cout<<ans<<"\n";
     }
